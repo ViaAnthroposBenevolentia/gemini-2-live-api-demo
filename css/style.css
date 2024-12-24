@@ -1,169 +1,234 @@
+:root {
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --primary-color: #4285f4;
+    --success-color: #34a853;
+    --danger-color: #ea4335;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --border-radius: 12px;
+    --transition: all 0.2s ease-in-out;
+}
+
 body {
-    font-family: sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.5;
 }
 
 #app {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    background-color: var(--bg-primary);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    width: 95%;
     max-width: 800px;
+    margin: var(--spacing-md) auto;
+    transition: var(--transition);
 }
 
 #logs-container {
-    border: 1px solid #ccc;
-    height: 300px;
+    border: none;
+    height: 400px;
     overflow-y: auto;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-    scroll-behavior: smooth;
-}
-
-#logs-container:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    background: var(--bg-secondary);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+    transition: var(--transition);
 }
 
 .log-entry {
-    font-size: 0.9em;
-    margin-bottom: 5px;
+    font-size: 0.95em;
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    border-radius: 8px;
+    background: var(--bg-primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .log-entry.system {
-    color: #080; /* Green for system messages */
+    color: var(--success-color);
+    border-left: 3px solid var(--success-color);
 }
 
 .log-entry.user {
-    color: #008; /* Blue for user messages */
+    color: var(--primary-color);
+    border-left: 3px solid var(--primary-color);
 }
 
 .log-entry.ai {
-    color: #800; /* Red for AI messages */
+    color: var(--danger-color);
+    border-left: 3px solid var(--danger-color);
 }
 
 .log-entry .timestamp {
-    color: #888;
-    margin-right: 5px;
-}
-
-.log-entry .emoji {
-    margin-right: 5px;
+    color: var(--text-secondary);
+    font-size: 0.85em;
 }
 
 #message-input {
-    width: calc(100% - 100px);
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 10px;
-}
-
-#send-button, #mic-button {
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #4285f4;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-#send-button:hover, #mic-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-#send-button:active, #mic-button:active {
-    transform: translateY(1px);
-}
-
-#send-button::after, #mic-button::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s ease, height 0.3s ease;
-}
-
-#send-button:active::after, #mic-button:active::after {
-    width: 200px;
-    height: 200px;
-}
-
-#audio-visualizer {
     width: 100%;
-    height: 20px;
-    background-color: #eee;
-    margin-top: 10px;
-    border-radius: 4px;
-    overflow: hidden;
+    margin: var(--spacing-sm) 0;
+    padding: 14px 16px;
+    font-size: 16px;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    background: var(--bg-secondary);
+    transition: var(--transition);
 }
 
-.audio-bar {
-    height: 100%;
-    background-color: #4285f4;
-    width: 0%;
+#message-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: var(--bg-primary);
+    box-shadow: 0 0 0 4px rgba(66, 133, 244, 0.1);
 }
 
-/* Add a simple animation for the audio bars */
-@keyframes audio-pulse {
-    0% {
-        transform: scaleY(1);
-    }
-    50% {
-        transform: scaleY(1.5);
-    }
-    100% {
-        transform: scaleY(1);
-    }
+#send-button, #mic-button, #camera-button, #screen-button {
+    padding: 12px;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: var(--transition);
+    min-width: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
 }
 
-.audio-bar.active {
-    animation: audio-pulse 0.5s infinite;
+#send-button:hover, #mic-button:hover, #camera-button:hover, #screen-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(66, 133, 244, 0.2);
 }
 
 #connect-button {
-    padding: 10px 20px;
-    margin-bottom: 10px;
+    padding: 12px 24px;
+    margin-bottom: var(--spacing-md);
     border: none;
-    border-radius: 4px;
-    background-color: #34a853;
-    color: #fff;
+    border-radius: var(--border-radius);
+    background-color: var(--success-color);
+    color: white;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+#connect-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 168, 83, 0.2);
 }
 
 #connect-button.connected {
-    background-color: #ea4335;
+    background-color: var(--danger-color);
+}
+
+.controls-container {
+    display: flex;
+    gap: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+    align-items: center;
+}
+
+.button-group {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.visualizer-container {
+    background: var(--bg-secondary);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-sm);
+}
+
+.visualizer-container label {
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+    display: block;
+}
+
+#input-audio-visualizer,
+#audio-visualizer {
+    height: 24px;
+    background-color: var(--bg-primary);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+#input-audio-visualizer .audio-bar {
+    background-color: var(--success-color);
+}
+
+#audio-visualizer .audio-bar {
+    background-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    #app {
+        padding: var(--spacing-md);
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    .controls-container {
+        flex-direction: column;
+    }
+    
+    #message-input {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .button-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+/* Scrollbar styling */
+#logs-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+#logs-container::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+#logs-container::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+#logs-container::-webkit-scrollbar-thumb:hover {
+    background: #999;
 }
 
 #video-container {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    max-height: 40vh;
+    border-radius: 0;
     background: #000;
-    border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 480px;
-    height: 360px;
     transition: all 0.3s ease;
 }
 
@@ -241,6 +306,11 @@ body {
     transition: all 0.2s ease;
     position: relative;
     overflow: hidden;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #camera-button:hover {
@@ -336,6 +406,11 @@ body {
     transition: all 0.2s ease;
     position: relative;
     overflow: hidden;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #screen-button:hover {
@@ -372,15 +447,15 @@ body {
 /* Add styles for screen preview */
 #screen-container {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    max-height: 40vh;
+    border-radius: 0;
     background: #000;
-    border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 480px;
-    height: 360px;
-    transition: all 0.3s ease;
     display: none;
     z-index: 1000;
 }
@@ -480,5 +555,72 @@ body {
 
 .audio-bar.active {
     animation: audio-pulse 0.5s infinite;
+}
+
+/* Add responsive layout for controls */
+.controls-container {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+    margin: var(--spacing-md) 0;
+}
+
+/* Style the button group */
+.button-group {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+/* Add media queries for responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+    
+    #app {
+        width: 100%;
+        border-radius: 0;
+        padding: var(--spacing-sm);
+    }
+    
+    #logs-container {
+        height: 50vh;
+    }
+    
+    .audio-visualizers {
+        margin: var(--spacing-sm) 0;
+    }
+    
+    .video-controls {
+        padding: var(--spacing-sm);
+    }
+}
+
+/* Add larger screen optimizations */
+@media (min-width: 769px) {
+    #message-input {
+        width: calc(100% - 220px); /* Account for buttons */
+    }
+    
+    #video-container,
+    #screen-container {
+        width: 480px;
+        height: 360px;
+        border-radius: 12px;
+    }
+}
+
+/* Improve touch targets on mobile */
+@media (hover: none) {
+    .video-controls {
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.7);
+    }
+    
+    #screen-container .close-button {
+        opacity: 1;
+        padding: var(--spacing-md);
+    }
 }
  

@@ -11,17 +11,21 @@
     <div id="app">
         <button id="connect-button">Connect</button>
         <div id="logs-container"></div>
-        <input type="text" id="message-input" placeholder="Enter message...">
-        <button id="send-button">Send</button>
-        <button id="mic-button">
-            <span id="mic-icon" class="material-symbols-outlined">mic</span>
-        </button>
-        <button id="camera-button">
-            <span id="camera-icon" class="material-symbols-outlined">videocam</span>
-        </button>
-        <button id="screen-button">
-            <span id="screen-icon" class="material-symbols-outlined">screen_share</span>
-        </button>
+        <div class="controls-container">
+            <input type="text" id="message-input" placeholder="Enter message...">
+            <div class="button-group">
+                <button id="send-button">Send</button>
+                <button id="mic-button">
+                    <span id="mic-icon" class="material-symbols-outlined">mic</span>
+                </button>
+                <button id="camera-button">
+                    <span id="camera-icon" class="material-symbols-outlined">videocam</span>
+                </button>
+                <button id="screen-button">
+                    <span id="screen-icon" class="material-symbols-outlined">screen_share</span>
+                </button>
+            </div>
+        </div>
         <div class="audio-visualizers">
             <div class="visualizer-container">
                 <label>Input Audio</label>
